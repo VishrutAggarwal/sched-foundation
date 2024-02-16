@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>T&F Blocker</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    
+
+    <div id="page-layout">
+        <div id="page-header">
+            <h1>Schedule your day</h1>
+        </div>
+        
+        <div id="left-panel">
+            <div id="am-section">
+                <p>AM</p>
+            </div>
+
+            <div id="mt-section"></div>
+
+            <div id="pm-section">
+                <p>PM</p>
+            </div>
+        </div>
+        
+        <div id="main-area">
+            <div id="am-row">
+            </div>
+
+            <div id="hrs-row">
+            </div>
+
+            <div id="pm-row">
+            </div>
+        </div>
+        
+        
+        <div id="tile-creator">
+            <form id="tileCreationForm">
+                <label for="tileCategory">Choose a category:</label>
+                
+                <select name="tileCategory" id="tileCategory">
+                </select>
+                
+                <button type="submit">Create Tile</button>
+            </form>
+            
+            
+            <br>
+            
+            <form id="categoryCreationForm">
+                <label for="tileName">Tile Name:</label>
+                <input type="text" id="tileName" name="tileName" required>
+                
+                <label for="focusLvl">Focus Level:</label>
+                <select name="focusLvl" id="focusLvl" required>
+                    <option value="high">High</option>
+                    <option value="mid">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                
+                <button type="submit">Create Category</button>
+            </form>
+        </div>
+        
+        <div id="newTiles">
+            
+        </div>
+        
+        <div id="page-footer">
+            <h5>© 2024 Vishrut Aggarwal. All rights reserved.</h5>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
