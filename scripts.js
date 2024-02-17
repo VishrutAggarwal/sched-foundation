@@ -32,6 +32,52 @@ const tileCreate = document.getElementById('tileCreationForm').addEventListener(
     document.getElementById('newTiles').appendChild(tile);
 });
 
+// Function to delete a category
+// const catDelete = document.getElementById('categoryDeletionForm').addEventListener('submit', function(event) {
+//     event.preventDefault();
+    
+//     const tileOptions = JSON.parse(localStorage.getItem('categoryData')) || [];
+//     const scheduleData = JSON.parse(localStorage.getItem('scheduleData')) || {am: [], pm: []};
+//     const tileCategory = document.getElementById('deleteCategory').value;
+
+//     for(let i = 0; i < tileOptions.length; i++) {
+//         if(tileOptions[i].tileName.toLowerCase() === tileCategory) {
+//             tileOptions.splice(i, 1);
+//             console.log(tileOptions)
+//             localStorage.setItem('categoryData', JSON.stringify(tileOptions));
+//             createTileOptions();
+//             return;
+//         }
+//     }
+
+//     for(let i = 0; i < scheduleData.am.length; i++) {
+//         if(Object.values(scheduleData.am[i])[0] === tileCategory) {
+//             scheduleData.am.splice(i, 1);
+//             localStorage.setItem('scheduleData', JSON.stringify(scheduleData));
+//             return;
+//         }
+//     }
+
+//     for(let i = 0; i < scheduleData.pm.length; i++) {
+//         if(Object.values(scheduleData.pm[i])[0] === tileCategory) {
+//             scheduleData.pm.splice(i, 1);
+//             localStorage.setItem('scheduleData', JSON.stringify(scheduleData));
+//             return;
+//         }
+//     }
+
+// });
+
+// Function to delete a tile from right clicking tile
+// function deleteTile(event) {
+//     if(event.button === 2) {
+//         event.preventDefault();
+//         console.log(event.target)
+//         event.target.remove();
+//     }
+//     const deletedTiles = document.getElementsByClassName('deleted');
+//     const scheduleData = JSON.parse(localStorage.getItem('scheduleData')) || {am: [], pm: []};
+// }
 
 // Function to create a tile
 function createTile(tileName) {
@@ -54,11 +100,11 @@ function createTile(tileName) {
             tile.id = `tile-${tileCounter}`;
             tile.draggable = true;
             tile.addEventListener('dragstart', handleDragStart);
+            tile.addEventListener('click', deleteTile);
             tiles.push(tileName)
             return tile;
         }
     }
-
 }
 
 // Function to create tile options
@@ -68,12 +114,16 @@ function  createTileOptions() {
     const tileCategory = document.getElementById('tileCategory');
     tileCategory.innerHTML = '';
 
+    const deleteCategory = document.getElementById('deleteCategory');
+    deleteCategory.innerHTML = '';
+
     for(let i = 0; i < tileOptions.length; i++) {
         const option = document.createElement('option');
         option.value = tileOptions[i].tileName.toLowerCase();
         option.textContent = tileOptions[i].tileName;
         option.classList.add(tileOptions[i].focusLvl.toLowerCase());
         tileCategory.appendChild(option);
+        deleteCategory.appendChild(option.cloneNode(true));
     }
 
     const savedSchedule = JSON.parse(localStorage.getItem('scheduleData'));
@@ -89,6 +139,7 @@ function  createTileOptions() {
         for(let i = 0; i < savedSchedule.pm.length; i++) {
             const tileName = Object.values(savedSchedule.pm[i])[0];
             const tileHr = Object.keys(savedSchedule.pm[i])[0];
+
             const tile = createTile(tileName);
             document.getElementById(`pm-box-${tileHr}`).appendChild(tile);
         }
